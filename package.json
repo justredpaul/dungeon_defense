@@ -1,0 +1,15 @@
+{
+  "name": "defense-game",
+  "version": "1.0.0",
+  "scripts": {
+    "serve": "parcel src/index.html",
+    "build": "parcel build src/index.html --no-scope-hoist"
+  },
+  "author": "Pavel (Paul) Popov <justredpaul@ya.ru>",
+  "private": "true",
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@parcel/transformer-image": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-beta.2"
+  }
+}
