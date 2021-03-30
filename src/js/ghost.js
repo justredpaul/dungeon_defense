@@ -2,7 +2,7 @@ import { Drawable } from './drawable';
 import { tileSet } from './tileAtlas';
 
 export class Ghost extends Drawable {
-  constructor({ tile, type, shooting, health, power, price, tiles, row, ...args }) {
+  constructor({ tile, type, shooting, healing, health, power, price, tiles, row, ...args }) {
     super(args);
 
     // Own props
@@ -12,6 +12,7 @@ export class Ghost extends Drawable {
     // Defender props
     this.type = type;
     this.shooting = shooting;
+    this.healing = healing;
     this.health = health;
     this.power = power;
     this.tiles = tiles;
@@ -26,6 +27,7 @@ export class Ghost extends Drawable {
       height: this.height,
       type: this.type,
       shooting: this.shooting,
+      healing: this.healing,
       health: this.health,
       power: this.power,
       tiles: this.tiles,

@@ -9,7 +9,8 @@ export const ENEMIES = [
     power: 10,
     tiles: [TILES.ENEMY_1_IDLE, TILES.ENEMY_1_HIT],
     speed: 0.8,
-    gold: 30,
+    gold: 35,
+    fireResist: false,
   },
   {
     type: 'Slime',
@@ -18,30 +19,35 @@ export const ENEMIES = [
     tiles: [TILES.ENEMY_3_IDLE, TILES.ENEMY_3_HIT],
     speed: 0.3,
     gold: 50,
+    fireResist: false,
   },
   {
     type: 'Chort',
     health: 75,
-    power: 60,
+    power: 50,
     tiles: [TILES.ENEMY_2_IDLE, TILES.ENEMY_2_HIT],
     speed: 0.6,
     gold: 75,
+    fireResist: true,
   },
   {
     type: 'Boss',
-    health: 500,
+    health: 400,
     power: 90,
     tiles: [TILES.BOSS_IDLE, TILES.BOSS_HIT],
     speed: 0.5,
     gold: 250,
+    fireResist: true,
   },
-]
+];
 
 export class Enemy extends Drawable {
   constructor({ type, row, ...args }) {
     super(args);
 
-    const { speed, health, power, tiles, gold } = ENEMIES.find(enemy => enemy.type === type) || ENEMIES[0];
+    const {
+      speed, health, power, tiles, gold, fireResist,
+    } = ENEMIES.find(enemy => enemy.type === type) || ENEMIES[0];
 
     this.type = type;
     this.x = CANVAS_WIDTH;
@@ -54,6 +60,7 @@ export class Enemy extends Drawable {
     this.health = health;
     this.maxHealth = health;
     this.power = power;
+    this.fireResist = fireResist;
 
     this.frame = 0;
   }
@@ -95,5 +102,14 @@ export class Enemy extends Drawable {
     if (this.x <= 64) {
       this.isAttacking = true;
     }
+  }
+
+  jumpToRow(row) {
+    console.log(`jump from ${this.y} to ${row * 64}`);
+
+    this.row = row;
+    this.x = CANVAS_WIDTH;
+    this.y = row * 64;
+    this.isAttacking = false;
   }
 }

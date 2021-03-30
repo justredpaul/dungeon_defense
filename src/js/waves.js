@@ -14,7 +14,8 @@ const enemyPacks = [
   ['Boss'],
 ];
 
-const enemyCount = [20, 50, 75, 1];
+const enemyCount = [20, 40, 60, 1];
+const spawnSpeed = [2.5, 1.6, 0.8, 1];
 
 export class Waves {
   currentWave = null;
@@ -29,6 +30,7 @@ export class Waves {
         message: messages[i],
         enemyPack: enemyPacks[i],
         enemyCount: enemyCount[i],
+        spawnSpeed: spawnSpeed[i]
       });
     }
   }
@@ -51,16 +53,9 @@ export class Waves {
   }
 
   spawn() {
-    if (this.currentWave !== null && window.dungeon_defense_game.frame % 100 === 0) {
+    if (this.currentWave !== null && window.dungeon_defense_game.frame % (100 * this.waves[this.currentWave].spawnSpeed) === 0) {
 
-      const vacantRows = [];
-      window.dungeon_defense_game.resources.chests
-        .forEach((chest, index) => {
-          if (chest.isFull) {
-            vacantRows.push(index + 1);
-          }
-        });
-
+      const vacantRows = window.dungeon_defense_game.resources.getVacantRows();
       const randomRow = vacantRows[Math.floor(Math.random() * vacantRows.length)];
 
       const { enemyPack } = this.waves[this.currentWave];

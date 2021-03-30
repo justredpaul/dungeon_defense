@@ -45,4 +45,17 @@ export class Resources {
       }
     }
   }
+
+  getVacantRows() {
+    const vacantRows = [];
+
+    window.dungeon_defense_game.resources.chests
+      .forEach((chest, index) => {
+        if (chest.isFull) {
+          vacantRows.push(index + 1);
+        }
+      });
+
+    return vacantRows;
+  }
 }

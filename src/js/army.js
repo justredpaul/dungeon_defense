@@ -17,6 +17,7 @@ export const DEFENDERS = [
     power: 10,
     tiles: [TILES.DEFENDER_1_IDLE, TILES.DEFENDER_1_HIT],
     weapon: shortSword,
+    healing: true,
   },
   {
     type: 'Knight',
@@ -26,6 +27,7 @@ export const DEFENDERS = [
     power: 50,
     tiles: [TILES.DEFENDER_2_IDLE, TILES.DEFENDER_2_HIT],
     weapon: sword,
+    healing: false,
   },
   {
     type: 'Mage',
@@ -35,8 +37,9 @@ export const DEFENDERS = [
     power: 30,
     tiles: [TILES.DEFENDER_3_IDLE, TILES.DEFENDER_3_HIT],
     weapon: fireball,
+    healing: false,
   },
-]
+];
 
 export class Army {
   defenders = [];
@@ -130,7 +133,7 @@ export class Army {
 
     for (let throwing of this.throwings) {
       for (let enemy of horde.enemies) {
-        if (isCollide(throwing, enemy)) {
+        if (isCollide(throwing, enemy) && !enemy.fireResist) {
           enemy.health -= throwing.power;
           throwing.remove = true;
 
@@ -156,6 +159,16 @@ export class Army {
       });
     }
   }
+
+  heal() {
+    if (window.dungeon_defense_game.frame % 250 === 0) {
+      this.defenders.forEach(defender => defender.heal());
+    }
+  }
+
+  isOccupied(x, y) {
+    return this.defenders.some(defender => defender.x === x && defender.y === y);
+  }
 }
 
 const isCollide = (first, second) => {
@@ -163,4 +176,4 @@ const isCollide = (first, second) => {
     || first.x + first.width <= second.x
     || first.y >= second.y + second.height
     || first.y + first.height <= second.y);
-}
+};

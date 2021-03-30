@@ -19,10 +19,11 @@ export class Horde {
       if (enemy.x <= 64) {
         window.dungeon_defense_game.resources.hitChest(enemy.row);
 
-        enemy.remove = true;
+        const vacantRows = window.dungeon_defense_game.resources.getVacantRows();
+        const randomRow = vacantRows[Math.floor(Math.random() * vacantRows.length)];
+
+        enemy.jumpToRow(randomRow);
       }
     });
-
-    this.enemies = this.enemies.filter(({ remove }) => !remove);
   }
 }

@@ -5,7 +5,8 @@ import { TILES, tileSet } from './tileAtlas';
 export class Defender extends Drawable {
   constructor({
                 type = 1,
-                shooting = true,
+                shooting = false,
+                healing = false,
                 health = 100,
                 power = 1,
                 row,
@@ -17,10 +18,11 @@ export class Defender extends Drawable {
     this.type = type;
     this.row = row;
     this.shooting = shooting;
+    this.healing = healing;
     this.health = health;
     this.maxHealth = health;
     this.power = power;
-    this.tiles = tiles
+    this.tiles = tiles;
     this.isAttacking = false;
 
     this.frame = 0;
@@ -57,7 +59,15 @@ export class Defender extends Drawable {
         y: this.y + 30,
         width: 20,
         height: 20,
-      }))
+      }));
+
+      this.health -= this.power / 10;
+    }
+  }
+
+  heal() {
+    if (this.healing && !this.isAttacking) {
+      this.health = Math.min(this.maxHealth, this.health + this.maxHealth / 20);
     }
   }
 }
