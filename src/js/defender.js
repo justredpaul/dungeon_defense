@@ -34,12 +34,6 @@ export class Defender extends Drawable {
       ? this.tiles[1] : this.tiles[0];
     window.dungeon_defense_game.ctx.drawImage(tileSet, tileX + Math.floor(this.frame) * tileWidth, tileY, tileWidth, tileHeight, this.x + 5, this.y - ((tileHeight * 4) - this.height), tileWidth * 4, tileHeight * 4);
 
-    this.frame += this.isAttacking ? 0.18 : 0.12;
-
-    if (this.frame > frames) {
-      this.frame = 0;
-    }
-
     // Draw they health
     [tileX, tileY, tileWidth, tileHeight] = this.maxHealth - this.health === 0
       ? TILES.HEALTH_BAR_FULL
@@ -49,6 +43,17 @@ export class Defender extends Drawable {
           ? TILES.HEALTH_BAR_MEDIUM
           : TILES.HEALTH_BAR_LOW;
     window.dungeon_defense_game.ctx.drawImage(tileSet, tileX, tileY, tileWidth, tileHeight, this.x + 15, this.y - 20, 39, 10);
+
+
+    this.frame += (this.isAttacking ? 0.18 : 0.12) * window.dungeon_defense_game.gameSpeed;
+
+    if (this.frame > frames) {
+      this.frame = 0;
+    }
+
+    if (this.frame > frames) {
+      this.frame = 0;
+    }
   }
 
   shoot() {

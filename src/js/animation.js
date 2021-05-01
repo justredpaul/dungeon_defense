@@ -22,6 +22,11 @@ export const setupAnimationLoop = (board) => {
     window.dungeon_defense_game.army.checkCollision();
     window.dungeon_defense_game.horde.checkChests();
 
+    window.dungeon_defense_game.debug.countFps();
+    if (window.dungeon_defense_game.showFPS) {
+      window.dungeon_defense_game.debug.displayFps();
+    }
+
     if (!window.dungeon_defense_game.isOver && !window.dungeon_defense_game.onPause) requestAnimationFrame(animate);
   };
 

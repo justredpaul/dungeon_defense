@@ -26,6 +26,6 @@ export const TILES = {
   FIREBALL_2: [0, 64, 16, 16, 4],
   FIREBALL_3: [0, 80, 16, 16, 4],
   FIRE_HIT: [69, 178, 7, 48, 4],
-}
+};
 
 export const tileSet = document.getElementById('tile_source');

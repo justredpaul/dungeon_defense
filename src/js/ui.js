@@ -33,6 +33,8 @@ export const createUi = () => {
     aboutPopup.style.visibility = 'hidden';
   });
 
+  const debug = document.querySelector('.debug');
+
   return {
     ui,
     uiScore,
@@ -41,5 +43,6 @@ export const createUi = () => {
     uiWaves,
     winPopup,
     losePopup,
+    debug,
   }
-}
+};

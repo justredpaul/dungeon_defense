@@ -15,7 +15,7 @@ export const setupShop = () => {
 
     const preview = hero.querySelector('.hero__preview');
     const imgData = getBase64ImgFromTile(heroData.tiles);
-    preview.src = imgData.src
+    preview.src = imgData.src;
     preview.width = imgData.width;
     preview.height = imgData.height;
     preview.style.transform = `translateY(-${imgData.height - 48}px)`;
@@ -38,8 +38,8 @@ export const setupShop = () => {
           tile: heroData.tiles[0],
           x: 64,
           y: 64,
-          width: 64,
-          height: 64,
+          width: 40,
+          height: 40,
           row: 1,
         });
       }

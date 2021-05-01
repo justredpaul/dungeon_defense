@@ -151,7 +151,7 @@ export class Army {
   }
 
   throwAll() {
-    if (window.dungeon_defense_game.frame % 250 === 0) {
+    if (window.dungeon_defense_game.frame % (250 / window.dungeon_defense_game.gameSpeed) === 0) {
       this.defenders.forEach(defender => {
         if (window.dungeon_defense_game.horde.enemies.some(({ row }) => row === defender.row)) {
           defender.shoot();
@@ -161,7 +161,7 @@ export class Army {
   }
 
   heal() {
-    if (window.dungeon_defense_game.frame % 250 === 0) {
+    if (window.dungeon_defense_game.frame % (250 / window.dungeon_defense_game.gameSpeed) === 0) {
       this.defenders.forEach(defender => defender.heal());
     }
   }

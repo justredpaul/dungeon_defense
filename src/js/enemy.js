@@ -87,7 +87,7 @@ export class Enemy extends Drawable {
     const y = this.y - (tileHeight * 4 - this.height);
     window.dungeon_defense_game.ctx.drawImage(tileSet, tileX + Math.floor(this.frame) * tileWidth, tileY, tileWidth, tileHeight, this.x + 15, y, tileWidth * 4, tileHeight * 4);
 
-    this.frame += 0.16;
+    this.frame += 0.16 * window.dungeon_defense_game.gameSpeed;
 
     if (this.frame > frames) {
       this.frame = 0;
@@ -96,7 +96,7 @@ export class Enemy extends Drawable {
 
   move() {
     if (!this.isAttacking) {
-      this.x -= this.speed;
+      this.x -= this.speed * window.dungeon_defense_game.gameSpeed;
     }
 
     if (this.x <= 64) {
@@ -105,8 +105,6 @@ export class Enemy extends Drawable {
   }
 
   jumpToRow(row) {
-    console.log(`jump from ${this.y} to ${row * 64}`);
-
     this.row = row;
     this.x = CANVAS_WIDTH;
     this.y = row * 64;

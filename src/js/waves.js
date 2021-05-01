@@ -53,7 +53,10 @@ export class Waves {
   }
 
   spawn() {
-    if (this.currentWave !== null && window.dungeon_defense_game.frame % (100 * this.waves[this.currentWave].spawnSpeed) === 0) {
+    if (this.currentWave !== null && window.dungeon_defense_game.frame
+      % (100
+        * this.waves[this.currentWave].spawnSpeed
+        / window.dungeon_defense_game.gameSpeed) === 0) {
 
       const vacantRows = window.dungeon_defense_game.resources.getVacantRows();
       const randomRow = vacantRows[Math.floor(Math.random() * vacantRows.length)];

@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Alagard';
-  src: url('./assets/fonts/Alagard.woff2') format('woff2'),
-  url('./assets/fonts/Alagard.woff') format('woff');
+  src: url('../static/fonts/Alagard.woff2') format('woff2'),
+  url('../static/fonts/Alagard.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -22,20 +22,32 @@ html, body {
 
   background-color: #2E2E2E;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
 
   font-family: 'Alagard';
 
   box-sizing: border-box;
 }
 
-#canvas {
-  width: 900px;
-  height: 600px;
+.canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 660px;
+  height: 300px;
+
+  transform: translate(-50%, -50%);
+
+  @media screen and (min-width: 1056px) {
+    width: 1056px;
+    height: 480px;
+  }
 }
+
 
 .popup {
   position: fixed;
@@ -52,7 +64,7 @@ html, body {
   padding: 20px 30px;
 
   background-size: 100%;
-  background-image: url('assets/images/popup_bg.png');
+  background-image: url('../static/images/popup_bg.png');
 
   transform: translate(-50%, -50%);
 
@@ -77,7 +89,7 @@ html, body {
   min-width: 96px;
   min-height: 44px;
 
-  background-image: url('assets/images/button_idle.png');
+  background-image: url('../static/images/button_idle.png');
   background-repeat: no-repeat;
   background-size: 96px 44px;
   background-position: center;
@@ -90,7 +102,7 @@ html, body {
   font-family: 'Alagard';
 }
 .popup__button:active {
-  background-image: url('assets/images/button_active.png');
+  background-image: url('../static/images/button_active.png');
 }
 .popup__credentials {
   display: flex;
@@ -125,7 +137,7 @@ html, body {
   width: 900px;
   height: 144px;
 
-  background-image: url('assets/images/ui_bg.png');
+  background-image: url('../static/images/ui_bg.png');
   background-size: 900px 144px;
   background-position: center;
 
@@ -180,7 +192,7 @@ html, body {
 
   margin: 0 5px;
 
-  background-image: url('assets/images/button_idle.png');
+  background-image: url('../static/images/button_idle.png');
   background-repeat: no-repeat;
   background-size: 96px 44px;
   background-position: center;
@@ -193,7 +205,7 @@ html, body {
   font-family: 'Alagard';
 }
 .ui__button:active {
-  background-image: url('assets/images/button_active.png');
+  background-image: url('../static/images/button_active.png');
 }
 
 .hero {
@@ -236,7 +248,7 @@ html, body {
 
   margin: 0 auto;
 
-  background-image: url('assets/images/buy_button_idle.png');
+  background-image: url('../static/images/buy_button_idle.png');
   background-repeat: no-repeat;
   background-size: 52px 22px;
   background-position: center;
@@ -249,7 +261,7 @@ html, body {
   font-family: 'Alagard';
 }
 .hero__buy:active {
-  background-image: url('assets/images/buy_button_active.png');
+  background-image: url('../static/images/buy_button_active.png');
 }
 
 .wave {
@@ -272,4 +284,17 @@ html, body {
   font-size: 28px;
   text-shadow: 0 2px 0 black;
   text-align: center;
+}
+
+.debug {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(0,0,0, 0.3);
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 16px;
+
+  visibility: hidden;
 }

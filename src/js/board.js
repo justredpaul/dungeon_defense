@@ -11,18 +11,18 @@ class Fountain extends Drawable {
   }
 
   draw() {
-    this.frame += 0.1;
-    if (this.frame >= 1000) {
-      this.frame = 0;
-    }
-
     window.dungeon_defense_game.ctx.drawImage(tileSet, ...TILES.FOUNTAIN_TOP, this.x, this.y, this.width, this.height);
 
-    let [tileX, tileY, tileWidth, tileHeight, frames] = TILES.FOUNTAIN_WALL;
-    window.dungeon_defense_game.ctx.drawImage(tileSet, tileX + (Math.floor(this.frame) % frames) * tileWidth, tileY, tileWidth, tileHeight, this.x, this.y + 64, this.width, this.height);
+    let [tileX, tileY, tileWidth, tileHeight] = TILES.FOUNTAIN_WALL;
+    window.dungeon_defense_game.ctx.drawImage(tileSet, tileX + Math.floor(this.frame) * tileWidth, tileY, tileWidth, tileHeight, this.x, this.y + 64, this.width, this.height);
 
     [tileX, tileY, tileWidth, tileHeight, frames] = TILES.FOUNTAIN_FLOOR;
-    window.dungeon_defense_game.ctx.drawImage(tileSet, tileX + (Math.floor(this.frame) % frames) * tileWidth, tileY, tileWidth, tileHeight, this.x, this.y + 128, this.width, this.height);
+    window.dungeon_defense_game.ctx.drawImage(tileSet, tileX + Math.floor(this.frame) * tileWidth, tileY, tileWidth, tileHeight, this.x, this.y + 128, this.width, this.height);
+
+    this.frame += 0.1 * (window.dungeon_defense_game.gameSpeed || 1);
+    if (this.frame > frames) {
+      this.frame = 0;
+    }
   }
 }
 
