@@ -1,6 +1,6 @@
 # Dungeon Defence game
 
-Place elves, mages and warriors to defence chests with gold
+Place elves, mages and warriors to defence chests with gold from evil
 
 ## Run locally
 

@@ -1,3 +1,5 @@
+import { getGlobal, setGlobal } from 'helpers/globals';
+
 export class FpsComponent {
   lastCalled = 0;
 
@@ -10,8 +12,8 @@ export class FpsComponent {
       return;
     }
 
-    window.dungeon_defense_game.fps = Math.ceil(1 / ((performance.now() - this.lastCalled) / 1000));
-    window.dungeon_defense_game.gameSpeed = Math.round(60 / window.dungeon_defense_game.fps);
+    setGlobal('fps', Math.ceil(1 / ((performance.now() - this.lastCalled) / 1000)));
+    setGlobal('gameSpeed', Math.round(60 / getGlobal('fps')));
 
     this.lastCalled = performance.now();
   }

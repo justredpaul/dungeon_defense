@@ -1,5 +1,6 @@
 import { System } from 'baseClasses/system';
 import { FpsComponent } from '../../components/fps';
+import { setSystem } from '../../helpers/globals';
 
 export class Debug extends System {
   constructor() {
@@ -8,6 +9,8 @@ export class Debug extends System {
 }
 
 export const initDebug = () => {
-  window.dungeon_defense_game.systems.debug = new Debug();
-  window.dungeon_defense_game.systems.debug.addComponent(new FpsComponent());
+  const debug = new Debug();
+  debug.addComponent(new FpsComponent());
+
+  setSystem('debug', debug);
 };

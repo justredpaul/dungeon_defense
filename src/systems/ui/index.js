@@ -1,5 +1,5 @@
 import { System } from 'baseClasses/system';
-import { isMobile } from 'helpers/isMobile';
+import { getGlobal, setSystem } from 'helpers/globals';
 
 import { initShopPanel } from './shopPanel';
 import { initControlsPanel } from './controlsPanel';
@@ -14,8 +14,8 @@ export class UiSystem extends System {
     this.autoupdate = false;
 
     this.canvas = document.querySelector('.canvas#ui');
-    this.canvas.width = isMobile() ? 660 : 1056;
-    this.canvas.height = isMobile() ? 300 : 480;
+    this.canvas.width = getGlobal('canvasSize').width;
+    this.canvas.height = getGlobal('canvasSize').height;
     this.context = this.canvas.getContext('2d');
     this.context.imageSmoothingEnabled = false;
   }
@@ -27,5 +27,5 @@ export const initUi = () => {
   initShopPanel(ui).forEach(component => ui.addComponent(component));
   initControlsPanel(ui).forEach(component => ui.addComponent(component));
 
-  window.dungeon_defense_game.systems.ui = ui;
+  setSystem('ui', ui);
 };

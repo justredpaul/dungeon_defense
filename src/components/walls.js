@@ -1,4 +1,5 @@
 import { Drawable } from 'baseClasses/drawable';
+import { getGlobal } from 'helpers/globals';
 
 const WALL_TILE_SIZE = 16;
 const WALLS_TILES = [
@@ -20,18 +21,19 @@ export class WallsComponent {
   constructor(floorX, floorY, context, map) {
     this.drawables = [];
     const tiles = document.getElementById('board_tiles');
+    const tilesScale = getGlobal('tilesScale');
 
     for (let item of map) {
       const [x, y, type] = item;
 
-      const tile = [...WALLS_TILES[type], WALL_TILE_SIZE, WALL_TILE_SIZE];
+      const tile = [...WALLS_TILES[type]];
 
       this.drawables.push(new Drawable(
         tiles,
-        floorX + x * WALL_TILE_SIZE * window.dungeon_defense_game.tilesScale,
-        floorY + y * WALL_TILE_SIZE * window.dungeon_defense_game.tilesScale,
-        WALL_TILE_SIZE * window.dungeon_defense_game.tilesScale,
-        WALL_TILE_SIZE * window.dungeon_defense_game.tilesScale,
+        floorX + x * WALL_TILE_SIZE * tilesScale,
+        floorY + y * WALL_TILE_SIZE * tilesScale,
+        WALL_TILE_SIZE,
+        WALL_TILE_SIZE,
         tile,
         context
       ));
@@ -44,7 +46,7 @@ export class WallsComponent {
     });
   }
 
-  // Empty because we don't need to redraw floor tiles
+  // Empty because we don't need to redraw walls tiles
   update() {
   }
 }

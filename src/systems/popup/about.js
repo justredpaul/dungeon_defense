@@ -27,10 +27,6 @@ export const initAboutPopup = (canvas, context, onCloseClick) => {
       new TextComponent({ text: 'xyezawr', ...commonTextOptions, align: 'left' }),
     ],
     [
-      new TextComponent({ text: 'Music', ...commonTextOptions, align: 'right' }),
-      new TextComponent({ text: 'Swiss Arcade Game Entertainment', ...commonTextOptions, align: 'left' }),
-    ],
-    [
       new TextComponent({ text: 'Font', ...commonTextOptions, align: 'right' }),
       new TextComponent({ text: 'Hewett Tsoi', ...commonTextOptions, align: 'left' }),
     ],

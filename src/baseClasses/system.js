@@ -1,16 +1,28 @@
+import { nanoid } from 'nanoid';
+
 export class System {
   constructor(autoupdate = true) {
-    this.components = [];
+    this.components = {};
     this.autoupdate = autoupdate;
   }
 
   addComponent(component) {
-    this.components.push(component);
+    const id = nanoid();
+    this.components[id] = component;
 
     component.init();
+
+    return id;
+  }
+
+  removeComponent(id) {
+    this.components[id].beforeUpdate();
+    delete this.components[id];
   }
 
   update() {
-    this.components.forEach(component => component.update());
+    Object.keys(this.components)
+      .map(componentId => this.components[componentId])
+      .forEach(component => component.update());
   }
 }

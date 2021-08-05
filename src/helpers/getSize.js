@@ -1,3 +1,5 @@
+import { getGlobal } from './globals';
+
 export const getSize = (tileSize, level) => {
   let minX = 0;
   let minY = 0;
@@ -21,8 +23,10 @@ export const getSize = (tileSize, level) => {
     }
   });
 
+  const tilesScale = getGlobal('tilesScale');
+
   return {
-    width: (maxX - minX + 1) * tileSize * window.dungeon_defense_game.tilesScale,
-    height: (maxY - minY + 1) * tileSize * window.dungeon_defense_game.tilesScale
+    width: (maxX - minX + 1) * tileSize * tilesScale,
+    height: (maxY - minY + 1) * tileSize * tilesScale
   }
 };

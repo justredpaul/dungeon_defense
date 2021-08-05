@@ -1,0 +1,319 @@
+{
+  "#### DEFENDERS #####": "",
+  "elf": {
+    "name": "elf",
+    "type": "defender",
+    "health": {
+      "value": 70,
+      "resistance": [],
+      "regenerationSpeed": 0
+    },
+    "attack": {
+      "damage": 10,
+      "damageType": "slash",
+      "speed": 0.02,
+      "canShoot": false
+    },
+    "speed": 0,
+    "loot": {},
+    "cost": 50,
+    "tiles": {
+      "imageName": "elf",
+      "frames": {
+        "idle_right": [
+          [0, 0], [16, 0], [32, 0], [48, 0]
+        ],
+        "run_right": [
+          [64, 0], [80, 0], [96, 0], [112, 0]
+        ],
+        "idle_left": [
+          [0, 23], [16, 23], [32, 23], [48, 23]
+        ],
+        "run_left": [
+          [64, 23], [80, 23], [96, 23], [112, 23]
+        ]
+      },
+      "speed": 0.13
+    },
+    "size": {
+      "width": 16,
+      "height": 23
+    }
+  },
+  "knight": {
+    "name": "knight",
+    "type": "defender",
+    "health": {
+      "value": 150,
+      "resistance": ["slash"],
+      "regenerationSpeed": 0
+    },
+    "attack": {
+      "damage": 30,
+      "damageType": "slash",
+      "speed": 0.02,
+      "canShoot": false
+    },
+    "speed": 0,
+    "loot": {},
+    "cost": 200,
+    "tiles": {
+      "imageName": "knight",
+      "frames": {
+        "idle_right": [
+          [0, 0], [16, 0], [32, 0], [48, 0]
+        ],
+        "run_right": [
+          [64, 0], [80, 0], [96, 0], [112, 0]
+        ],
+        "idle_left": [
+          [0, 27], [16, 27], [32, 27], [48, 27]
+        ],
+        "run_left": [
+          [64, 27], [80, 27], [96, 27], [112, 27]
+        ]
+      },
+      "speed": 0.1,
+      "top": 4
+    },
+    "size": {
+      "width": 16,
+      "height": 27
+    }
+  },
+  "mage": {
+    "name": "mage",
+    "type": "defender",
+    "health": {
+      "value": 50,
+      "resistance": [],
+      "regenerationSpeed": 0
+    },
+    "attack": {
+      "damage": 10,
+      "damageType": "slash",
+      "speed": 0.02,
+      "canShoot": true,
+      "shootSpeed": 0.005,
+      "shootDamage": 20,
+      "shootDamageType": "fire"
+    },
+    "speed": 0,
+    "loot": {},
+    "cost": 100,
+    "tiles": {
+      "imageName": "mage",
+      "frames": {
+        "idle_right": [
+          [0, 0], [16, 0], [32, 0], [48, 0]
+        ],
+        "run_right": [
+          [64, 0], [80, 0], [96, 0], [112, 0]
+        ],
+        "idle_left": [
+          [0, 24], [16, 24], [32, 24], [48, 24]
+        ],
+        "run_left": [
+          [64, 24], [80, 24], [96, 24], [112, 24]
+        ]
+      },
+      "speed": 0.1,
+      "top": 4
+    },
+    "size": {
+      "width": 16,
+      "height": 24
+    }
+  },
+  "##### ENEMIES ######": "",
+  "training_dummy_stable": {
+    "name": "training_dummy_stable",
+    "type": "enemy",
+    "health": {
+      "value": 500,
+      "resistance": [],
+      "regenerationSpeed": 0
+    },
+    "attack": {
+      "damage": 0,
+      "speed": 0,
+      "canShoot": false
+    },
+    "speed": 0,
+    "loot": {
+      "gold": 200
+    },
+    "tiles": {
+      "imageName": "training_dummy_tiles",
+      "frames": {
+        "idle": [[0, 0]]
+      },
+      "speed": 0.1
+    },
+    "size": {
+      "width": 16,
+      "height": 16
+    }
+  },
+  "training_dummy_moving": {
+    "name": "training_dummy_moving",
+    "type": "enemy",
+    "health": {
+      "value": 150,
+      "resistance": [],
+      "regenerationSpeed": 0
+    },
+    "attack": {
+      "damage": 0,
+      "speed": 0,
+      "canShoot": false
+    },
+    "speed": 0.6,
+    "loot": {
+      "gold": 200
+    },
+    "tiles": {
+      "imageName": "training_dummy_tiles",
+      "frames": {
+        "idle_left": [[16, 0]],
+        "run_left": [
+          [16, 0], [32, 0], [48, 0], [64, 0], [80, 0]
+        ],
+        "idle_right": [[16, 0]],
+        "run_right": [
+          [16, 0], [32, 0], [48, 0], [64, 0], [80, 0]
+        ]
+      },
+      "speed": 0.1
+    },
+    "size": {
+      "width": 16,
+      "height": 16
+    }
+  },
+  "skeleton": {
+    "name": "skeleton",
+    "type": "enemy",
+    "health": {
+      "value": 40,
+      "resistance": [],
+      "regenerationSpeed": 0
+    },
+    "attack": {
+      "damage": 10,
+      "damageType": "slash",
+      "speed": 0.02,
+      "canShoot": false
+    },
+    "speed": 0.8,
+    "loot": {
+      "gold": 50
+    },
+    "tiles": {
+      "imageName": "skeleton",
+      "frames": {
+        "run_left": [
+          [0, 0], [16, 0], [32, 0], [48, 0]
+        ],
+        "idle_left": [
+          [64, 0], [80, 0], [96, 0], [112, 0]
+        ],
+        "run_right": [
+          [128, 0], [144, 0], [160, 0], [176, 0]
+        ],
+        "idle_right": [
+          [192, 0], [208, 0], [224, 0], [240, 0]
+        ]
+      },
+      "speed": 0.1
+    },
+    "size": {
+      "width": 16,
+      "height": 16
+    }
+  },
+  "slime": {
+    "name": "slime",
+    "type": "enemy",
+    "health": {
+      "value": 100,
+      "resistance": ["slash"],
+      "vulnerability": ["fire"],
+      "regenerationSpeed": 0.05
+    },
+    "attack": {
+      "damage": 20,
+      "damageType": "acid",
+      "speed": 0.02,
+      "canShoot": false
+    },
+    "speed": 0.3,
+    "loot": {
+      "gold": 75
+    },
+    "tiles": {
+      "imageName": "slime",
+      "frames": {
+        "run_left": [
+          [0, 0], [18, 0], [36, 0], [54, 0]
+        ],
+        "idle_left": [
+          [0, 0], [18, 0], [36, 0], [54, 0]
+        ],
+        "run_right": [
+          [0, 16], [18, 16], [36, 16], [54, 16]
+        ],
+        "idle_right": [
+          [0, 16], [18, 16], [36, 16], [54, 16]
+        ]
+      },
+      "speed": 0.1
+    },
+    "size": {
+      "width": 18,
+      "height": 16
+    }
+  },
+  "chort": {
+    "name": "chort",
+    "type": "enemy",
+    "health": {
+      "value": 75,
+      "resistance": ["fire"],
+      "vulnerability": ["slash"],
+      "regenerationSpeed": 0
+    },
+    "attack": {
+      "damage": 50,
+      "damageType": "fire",
+      "speed": 0.02,
+      "canShoot": false
+    },
+    "speed": 0.6,
+    "loot": {
+      "gold": 75
+    },
+    "tiles": {
+      "imageName": "chort",
+      "frames": {
+        "run_left": [
+          [0, 0], [16, 0], [32, 0], [48, 0]
+        ],
+        "idle_left": [
+          [64, 0], [80, 0], [96, 0], [112, 0]
+        ],
+        "run_right": [
+          [0, 23], [16, 23], [32, 23], [48, 23]
+        ],
+        "idle_right": [
+          [64, 23], [80, 23], [96, 23], [112, 23]
+        ]
+      },
+      "speed": 0.1
+    },
+    "size": {
+      "width": 16,
+      "height": 23
+    }
+  }
+}

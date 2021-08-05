@@ -1,6 +1,7 @@
 import { Drawable } from 'baseClasses/drawable';
 import { Clickable } from 'baseClasses/clickable';
 import { getSize } from 'helpers/getSize';
+import { getGlobal } from '../helpers/globals';
 
 const FLOOR_TILE_SIZE = 16;
 const FLOOR_TILES = [
@@ -13,7 +14,7 @@ const FLOOR_TILES = [
 
 export class FloorComponent extends Clickable {
   constructor(floorX, floorY, onClick, context, map) {
-    const tileSize = FLOOR_TILE_SIZE * window.dungeon_defense_game.tilesScale;
+    const tileSize = FLOOR_TILE_SIZE * getGlobal('tilesScale');
 
     const floorBounds = {
       x: floorX,
@@ -23,7 +24,7 @@ export class FloorComponent extends Clickable {
     const onTileClick = ({ x, y }) => {
       onClick({
         x: Math.floor((x - floorX) / tileSize),
-        y: Math.floor((y - floorY) / tileSize)
+        row: Math.floor((y - floorY) / tileSize) + 1
       });
     };
     super(floorBounds, onTileClick);
@@ -34,14 +35,14 @@ export class FloorComponent extends Clickable {
     for (let item of map) {
       const [x, y, type] = item;
 
-      const tile = [...FLOOR_TILES[type], FLOOR_TILE_SIZE, FLOOR_TILE_SIZE];
+      const tile = [...FLOOR_TILES[type]];
 
       this.drawables.push(new Drawable(
         tiles,
         floorX + x * tileSize,
         floorY + y * tileSize,
-        tileSize,
-        tileSize,
+        FLOOR_TILE_SIZE,
+        FLOOR_TILE_SIZE,
         tile,
         context
       ));

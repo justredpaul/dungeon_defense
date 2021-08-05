@@ -1,12 +1,6 @@
 import { Clickable } from 'baseClasses/clickable';
 import { isMobile } from 'helpers/isMobile';
-
-const SHOP_ICONS_TILES = {
-  GOLD: [0, 0, 16, 16],
-  SWORD: [16, 0, 16, 16],
-  WAND: [0, 16, 16, 16],
-  SHIELD: [16, 16, 16, 16],
-};
+import { ShopCell } from './shopCell';
 
 export class ShopEntity extends Clickable {
   constructor(size, entity, onClick, context) {
@@ -14,21 +8,17 @@ export class ShopEntity extends Clickable {
     this.x = 0;
     this.y = 0;
     this.width = size.width - 10;
-    this.height = isMobile() ? 70 : 120;
+    this.height = isMobile() ? 80 : 120;
     this.entity = entity;
     this.context = context;
     this.active = false;
+
+    this.cell = new ShopCell(0, 0, size.width, this.height, context);
   }
 
   _draw() {
-    const shop_icons = document.getElementById('shop_icons');
-
     // Draw hero preview
     this.context.save();
-
-    if (this.active) {
-      this.context.strokeRect(this.x, this.y - 2, this.width, this.height + 2);
-    }
 
     const [tileX, tileY, tileWidth, tileHeight] = this.entity.tile;
     const tileSize = isMobile() ? 2.5 : 4;
@@ -38,8 +28,8 @@ export class ShopEntity extends Clickable {
       tileY,
       tileWidth,
       tileHeight,
-      this.x,
-      this.y,
+      this.x + (isMobile() ? 15 : 28),
+      this.y + this.height - tileHeight * tileSize + (isMobile() ? -6 : -10),
       tileWidth * tileSize,
       tileHeight * tileSize
     );
@@ -50,28 +40,36 @@ export class ShopEntity extends Clickable {
     this.context.font = `${fontSize}px Alagard`;
     this.context.textAlign = 'end';
     this.context.textBaseline = 'middle';
-    const iconSize = isMobile() ? 16 : 32;
-
-    // Attack
-    this.context.drawImage(shop_icons, ...SHOP_ICONS_TILES[this.entity.weapon], this.x + this.width / 2, this.y, iconSize, iconSize);
-    this.context.fillText(this.entity.attack, this.x + this.width - 4, this.y + iconSize / 2);
-
-    // Defence
-    this.context.drawImage(shop_icons, ...SHOP_ICONS_TILES.SHIELD, this.x + this.width / 2, this.y + iconSize + 10, iconSize, iconSize);
-    this.context.fillText(this.entity.defense, this.x + this.width - 4, this.y + iconSize + 10 + iconSize / 2);
 
     // Cost
-    this.context.drawImage(shop_icons, ...SHOP_ICONS_TILES.GOLD, this.x + this.width / 2, this.y + iconSize * 2 + 20, iconSize, iconSize);
-    this.context.fillText(this.entity.cost, this.x + this.width - 4, this.y + iconSize * 2 + 20 + iconSize / 2);
+    this.context.fillText(
+      this.entity.cost,
+      this.x + this.width + (isMobile() ? -18 : -36),
+      this.y + this.height + (isMobile() ? -20 : -26)
+    );
 
     this.context.restore();
   }
 
   init() {
+    this.cell.init();
     this._draw();
   }
 
   update() {
+    this.cell.update();
     this._draw();
+  }
+
+  activate() {
+    this.active = true;
+
+    this.cell.activate();
+  }
+
+  deactivate() {
+    this.active = false;
+
+    this.cell.deactivate();
   }
 }
