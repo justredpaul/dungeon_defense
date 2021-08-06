@@ -248,6 +248,8 @@ export class Creature {
   }
 
   receiveDamage(damage, type) {
+    if (this.isDead) return;
+
     let multiplier = (this.health.vulnerability || []).includes(type)
       ? 1.5
       : (this.health.resistance || []).includes(type)
@@ -255,10 +257,10 @@ export class Creature {
         : 1;
     this.health.value -= damage * multiplier;
     this.healthDisplay.receiveDamage(damage * multiplier);
-  }
 
-  isDead() {
-    return this.health.value <= 0;
+    if (this.health.value <= 0) {
+      this.die();
+    }
   }
 
   spawnLoot() {
@@ -286,7 +288,21 @@ export class Creature {
   }
 
   takeChest() {
+    if (this.isDead) return;
+
     this.carryChest = true;
     getGlobal('events').emit('steal_chest', { row: this.row - 1 });
+  }
+
+  die() {
+    console.log(`Creature ${this.name} died`, this);
+    this.spawnLoot();
+
+    this.isDead = true;
+    this.speed = 0;
+    this.isAttacking = false;
+    if (this.type === 'enemy') {
+      getGlobal('events').emit('enemy_died');
+    }
   }
 }

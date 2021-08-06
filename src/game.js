@@ -47,6 +47,8 @@ const init = async () => {
       initUi();
       initNotificationSystem();
 
+      getGlobal('events').subscribe('win',
+        () => setGlobal('gameRunning', false));
       getGlobal('events').subscribe('lose',
         () => setGlobal('gameRunning', false));
       getGlobal('events').subscribe('pause',

@@ -44,11 +44,6 @@ export class RowsComponent {
         if (isCollide(shot.shot, enemy.creature)) {
           shot.health = { value:  0 };
           enemy.receiveDamage(shot.damage, shot.damageType);
-
-          if (shot.target.isDead()) {
-            getGlobal('events').emit('enemy_die');
-            shot.target.spawnLoot();
-          }
         }
       });
 
@@ -57,12 +52,10 @@ export class RowsComponent {
           defender.startAttack(enemy);
           enemy.startAttack(defender);
 
-          if (defender.isDead()) {
+          if (defender.isDead) {
             enemy.stopAttack();
           }
-          if (enemy.isDead()) {
-            getGlobal('events').emit('enemy_die');
-            enemy.spawnLoot();
+          if (enemy.isDead) {
             defender.stopAttack();
           }
         } else {

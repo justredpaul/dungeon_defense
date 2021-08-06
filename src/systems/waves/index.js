@@ -35,7 +35,7 @@ export class WaveSystem extends System {
         this.enemies.push({ name, count: 1 });
       }
     });
-    getGlobal('events').subscribe('enemy_die', () => {
+    getGlobal('events').subscribe('enemy_died', () => {
       this.enemiesRemains--;
 
       if (this.enemiesRemains === 0) {
