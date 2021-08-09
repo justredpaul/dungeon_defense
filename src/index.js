@@ -10,16 +10,19 @@ import { Audible } from './js/audible';
 
 import main_theme from 'url:./assets/sounds/main_theme.mp3';
 import { Waves } from './js/waves';
+import { setupDebug } from './js/debug';
 
 const popupWelcome = document.querySelector('.popup_welcome');
 const startButton = popupWelcome.querySelector('.popup__button');
 
 const init = () => {
+  window.scrollTo(0,1);
   window.dungeon_defense_game = {
     frame: 0,
     isOver: false,
     onPause: false,
-    rows: 6
+    rows: 6,
+    showFPS: true,
   };
 
   const { canvas, ctx } = setupCanvas();
@@ -27,10 +30,13 @@ const init = () => {
   window.dungeon_defense_game.canvas = canvas;
   window.dungeon_defense_game.ctx = ctx;
 
+  window.dungeon_defense_game.ui = createUi();
+  window.dungeon_defense_game.debug = setupDebug();
+
   const board = new Board();
+
   window.dungeon_defense_game.resources = new Resources({ startValue: 300 });
 
-  window.dungeon_defense_game.ui = createUi();
   window.dungeon_defense_game.shop = setupShop();
 
   window.dungeon_defense_game.army = new Army();
@@ -58,6 +64,6 @@ const init = () => {
       window.dungeon_defense_game.ui.losePopup.style.visibility = 'visible';
     }
   }
-}
+};
 
 startButton.addEventListener('click', init);

@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Alagard';
+  src: url('Alagard.woff2') format('woff2'),
+  url('Alagard.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'Alagard', sans-serif;
+}

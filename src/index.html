@@ -3,219 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    content="width=device-width, initial-scale=1.0, max-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Dungeon Defence</title>
-  <link rel="stylesheet" href="index.css">
+
+  <link rel="preload" href="../static/fonts/Alagard.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="../static/fonts/Alagard.woff" as="font" type="font/woff" crossorigin="anonymous">
+  <link rel="stylesheet" href="../static/fonts/fonts.scss">
+
+  <link rel="stylesheet" href="index.scss">
 </head>
 <body>
 
-<section class="ui">
-  <div class="ui__score">
-    <p class="ui__gold">
-      <span class="ui__score-caption">Gold</span>
-      <span class="ui__score-value">300</span>
-    </p>
-  </div>
-  <div class="ui__shop">
-    <div class="ui__hero hero">
-      <div class="hero__top">
-        <img src="" role="presentation" class="hero__preview">
+<canvas class="canvas" id="board"></canvas>
+<canvas class="canvas" id="creatures"></canvas>
+<canvas class="canvas" id="ui"></canvas>
+<canvas class="canvas" id="popup"></canvas>
 
-        <div class="hero__stats">
-        <p>
-          <span class="hero__icon">
-            <img src="" role="presentation" class="hero__weapon">
-          </span>
-          <span class="hero__attack"></span>
-        </p>
-        <p>
-          <span class="hero__icon">
-            <img src="assets/images/heart_icon.png" role="presentation" class="hero__weapon">
-          </span>
-          <span class="hero__health"></span>
-        </p>
-      </div>
-      </div>
+<script src="./game.js"></script>
 
-      <button class="hero__buy"></button>
-    </div>
-    <div class="ui__hero hero">
-      <div class="hero__top">
-        <img src="" role="presentation" class="hero__preview">
-
-        <div class="hero__stats">
-          <p>
-          <span class="hero__icon">
-            <img src="" role="presentation" class="hero__weapon">
-          </span>
-            <span class="hero__attack"></span>
-          </p>
-          <p>
-          <span class="hero__icon">
-            <img src="assets/images/heart_icon.png" role="presentation" class="hero__weapon">
-          </span>
-            <span class="hero__health"></span>
-          </p>
-        </div>
-      </div>
-
-      <button class="hero__buy"></button>
-    </div>
-    <div class="ui__hero hero">
-      <div class="hero__top">
-        <img src="" role="presentation" class="hero__preview">
-
-        <div class="hero__stats">
-          <p>
-          <span class="hero__icon">
-            <img src="" role="presentation" class="hero__weapon">
-          </span>
-            <span class="hero__attack"></span>
-          </p>
-          <p>
-          <span class="hero__icon">
-            <img src="assets/images/heart_icon.png" role="presentation" class="hero__weapon">
-          </span>
-            <span class="hero__health"></span>
-          </p>
-        </div>
-      </div>
-
-      <button class="hero__buy"></button>
-    </div>
-    <div class="ui__hero hero">
-      <div class="hero__top">
-        <img src="" role="presentation" class="hero__preview">
-
-        <div class="hero__stats">
-          <p>
-          <span class="hero__icon">
-            <img src="" role="presentation" class="hero__weapon">
-          </span>
-            <span class="hero__attack"></span>
-          </p>
-          <p>
-          <span class="hero__icon">
-            <img src="assets/images/heart_icon.png" role="presentation" class="hero__weapon">
-          </span>
-            <span class="hero__health"></span>
-          </p>
-        </div>
-      </div>
-
-      <button class="hero__buy"></button>
-    </div>
-  </div>
-  <div class="ui__buttons">
-    <button class="ui__button ui__button_pause">Pause</button>
-    <button class="ui__button ui__button_about">About</button>
-  </div>
-</section>
-
-<canvas id="canvas"></canvas>
-
-<div class="wave">
-  <p class="wave__message"></p>
-  <p class="wave__message"></p>
-</div>
-
-<section class="popup popup_visible popup_welcome">
-  <h2 class="popup__title">
-    Dungeon Defense
-  </h2>
-
-  <p class="popup__message">
-    Save your gold from terrible creatures
-    <br />
-    Recruit and place unit on lines to stop enemies
-    <br />
-    Defeat final boss to win and escape
-  </p>
-
-  <button class="popup__button">
-    Start
-  </button>
-</section>
-<section class="popup popup_about">
-  <h2 class="popup__title">
-    About
-  </h2>
-
-  <span class="popup__version">version 1.0.1</span>
-
-  <p class="popup__credentials">
-    <span class="popup__category">
-      Idea & programming
-    </span>
-    <span class="popup__person">
-      Pavel (Paul) Popov
-    </span>
-    <br />
-    <span class="popup__category">
-      Tiles
-    </span>
-    <span class="popup__person">
-      Robert Norenberg
-    </span>
-    <br />
-    <span class="popup__category"></span>
-    <span class="popup__person">
-      xyezawr
-    </span>
-    <br />
-    <span class="popup__category">
-      Music
-    </span>
-    <span class="popup__person">
-      Swiss Arcade Game Entertainment
-    </span>
-    <br />
-    <span class="popup__category">
-      Font
-    </span>
-    <span class="popup__person">
-      Hewett Tsoi
-    </span>
-  </p>
-
-  <button class="popup__button">
-    Close
-  </button>
-</section>
-<section class="popup popup_win">
-  <h2 class="popup__title">
-    You win!
-  </h2>
-
-  <p class="popup__message">
-    You have saved your chests with gold
-    <br />
-    and escaped from dungeon
-  </p>
-
-  <button class="popup__button" onclick="location.reload();">
-    Play again!
-  </button>
-</section>
-<section class="popup popup_lose">
-  <h2 class="popup__title">
-    You lose!
-  </h2>
-
-  <p class="popup__message">
-    Unfortunately you were defeated
-    <br />
-    Good luck next time!
-  </p>
-
-  <button class="popup__button" onclick="location.reload();">
-    Play again!
-  </button>
-</section>
-
-<img style="display: none;" id="tile_source" src="assets/images/tiles.png">
-<img style="display: none;" id="board_source" src="assets/images/board_bg.png">
-
-<script src="index.js"></script>
 </body>
 </html>
