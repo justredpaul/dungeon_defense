@@ -33,6 +33,6 @@ export const initWelcomePopup = (canvas, context, onStartClick) => {
     },
     canvas,
     context,
-    hidden: false
+    hidden: true
   });
 };

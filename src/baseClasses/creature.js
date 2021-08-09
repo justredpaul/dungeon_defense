@@ -1,7 +1,6 @@
 import { Animated } from './animated';
 import { Drawable } from './drawable';
 import { isMobile } from '../helpers/isMobile';
-import { getHealthBarTile } from '../helpers/getHealthBar';
 import { getGoldToSpawn } from '../helpers/getGoldToSpawn';
 import { Timer } from './timer';
 import { getYFromRow } from '../helpers/getYFromRow';
@@ -111,6 +110,13 @@ export class Creature {
         });
       }, attack.shootSpeed, 1, true, false);
     }
+
+    if (health.regenerationSpeed) {
+      this.regenerationTimer = new Timer(() => {
+        this.health.value = Math.min(this.health.value + this.maxHealth * 0.1, this.maxHealth * 0.7);
+        this.healthDisplay.restore(this.maxHealth * 0.1);
+      }, health.regenerationSpeed, 1, true, false);
+    }
   }
 
   _setupAnimation = () => {
@@ -156,8 +162,6 @@ export class Creature {
       this.isMoving = isMoving;
       this._setupAnimation();
     }
-
-    this.healthDisplay.tile = getHealthBarTile(this.health.value, this.maxHealth);
   }
 
   update() {
@@ -185,10 +189,19 @@ export class Creature {
     if (this.shootingTimer) {
       this.shootingTimer.tick();
     }
+
+    if (this.regenerationTimer && this.regenerationTimer.started) {
+      this.regenerationTimer.tick();
+      console.log(this.regenerationTimer.value, 'tick');
+    }
   }
 
   startAttack(target) {
     if (this.isAttacking) return;
+
+    if (this.regenerationTimer) {
+      this.regenerationTimer.stop();
+    }
 
     if (target.creature.x < this.creature.x) {
       this.turn(-1);
@@ -218,6 +231,11 @@ export class Creature {
 
   stopAttack() {
     if (!this.isAttacking) return;
+
+    if (this.regenerationTimer) {
+      this.regenerationTimer.start();
+      console.log(this, this.regenerationTimer);
+    }
 
     this.isAttacking = false;
     this.attackTimer.stop();

@@ -18,8 +18,13 @@ export class Timer {
     this.started = true;
   }
 
+  pause() {
+    this.started = false;
+  }
+
   stop() {
     this.started = false;
+    this.value = 0;
   }
 
   tick() {

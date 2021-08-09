@@ -36,11 +36,16 @@ export const initControlsPanel = ui => {
     pauseButton.setLabel(isPause ? 'Play' : 'Pause');
     ui.update();
 
-    getGlobal('events').emit('toggle_board_touchability', { isBoardTouchable: !isPause });
     getGlobal('events').emit(isPause ? 'pause' : 'resume');
   };
-  getGlobal('events').subscribe('pause', () => pauseButton.setLabel('Play'));
-  getGlobal('events').subscribe('resume', () => pauseButton.setLabel('Pause'));
+  getGlobal('events').subscribe('pause', () => {
+    getGlobal('events').emit('toggle_board_touchability', { isBoardTouchable: false });
+    pauseButton.setLabel('Play')
+  });
+  getGlobal('events').subscribe('resume', () => {
+    getGlobal('events').emit('toggle_board_touchability', { isBoardTouchable: true });
+    pauseButton.setLabel('Pause');
+  });
 
   const aboutButton = new ButtonComponent({
     x: ui.canvas.width - controlsSizes.width + 10,

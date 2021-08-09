@@ -5,6 +5,7 @@ export const initGlobals = () => {
     systems: {},
     tilesScale: isMobile() ? 2.5 : 4,
     gameSpeed: 2,
+    gameStarted: false,
     gameRunning: true,
     canvasSize: {
       width: isMobile() ? 660 : 1056,

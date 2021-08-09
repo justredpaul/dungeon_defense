@@ -5,6 +5,8 @@ import { initAboutPopup } from './about';
 import { initWinPopup } from './win';
 import { initLosePopup } from './lose';
 import { initPausePopup } from './pause';
+import { initRotateDevicePopup } from './rotateDevice';
+import { isPortraitMode } from '../../helpers/isPortraitMode';
 
 export class PopupSystem extends System {
   constructor() {
@@ -38,6 +40,10 @@ export class PopupSystem extends System {
 
     this.components[componentId].close();
   }
+
+  closeAllPopups() {
+    Object.keys(this.components).map(componentId => this.components[componentId].close());
+  }
 }
 
 export const initPopups = (onGameStart) => {
@@ -60,6 +66,39 @@ export const initPopups = (onGameStart) => {
 
   const onResume = () => getGlobal('events').emit('resume');
   popups.addComponent(initPausePopup(popups.canvas, popups.context, onResume));
+
+  popups.addComponent(initRotateDevicePopup(popups.canvas, popups.context));
+
+  const showRotatePopup = () => {
+    popups.closeAllPopups();
+
+    getGlobal('events').emit('pause');
+    popups.showPopup('rotateDevice');
+    popups.update();
+  };
+
+  if (isPortraitMode() && screen.availWidth < 660) {
+    showRotatePopup();
+  } else {
+    popups.showPopup('welcome');
+    popups.update();
+  }
+
+  window.addEventListener('resize', () => {
+    if (isPortraitMode() && screen.availWidth < 660) {
+      showRotatePopup();
+    } else {
+      popups.closePopup('rotateDevice');
+
+      if (!getGlobal('gameStarted')) {
+        popups.showPopup('welcome');
+      } else {
+        getGlobal('events').emit('resume');
+      }
+
+      popups.update();
+    }
+  });
 
   setSystem('popups', popups);
 };

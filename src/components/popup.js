@@ -10,20 +10,23 @@ export class PopupComponent {
     this.content = content;
     this.canvas = canvas;
     this.context = context;
-    this.action = new ButtonComponent({
-      x: this.x + this.width / 2 - 50,
-      y: this.y + this.height - 100,
-      width: 100,
-      height: 100,
-      label: action.caption,
-      onClick: () => {
-        action.onClick();
-        this.close();
-      },
-      context,
-      size: action.size,
-      hidden,
-    });
+
+    if (action) {
+      this.action = new ButtonComponent({
+        x: this.x + this.width / 2 - 50,
+        y: this.y + this.height - 100,
+        width: 100,
+        height: 100,
+        label: action.caption,
+        onClick: () => {
+          action.onClick();
+          this.close();
+        },
+        context,
+        size: action.size,
+        hidden,
+      });
+    }
     this.hidden = hidden === undefined ? true : hidden;
   }
 
@@ -59,7 +62,10 @@ export class PopupComponent {
     this._drawBackground();
     this.content && this.content.draw(this.x + 30, this.y + 30, this.width - 60, this.height - 120);
     this.action.hidden = false;
-    this.action.init();
+
+    if (this.action) {
+      this.action.init();
+    }
   }
 
   update() {
@@ -67,18 +73,27 @@ export class PopupComponent {
 
     this._drawBackground();
     this.content && this.content.draw(this.x + 30, this.y + 30, this.width - 60, this.height - 120);
-    this.action.hidden = false;
-    this.action.update();
+
+    if (this.action) {
+      this.action.hidden = false;
+      this.action.update();
+    }
   }
 
   show() {
     this.hidden = false;
-    this.action.listen();
+
+    if (this.action) {
+      this.action.listen();
+    }
   }
 
   close() {
     this.hidden = true;
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.action.destroy();
+
+    if (this.action) {
+      this.action.destroy();
+    }
   }
 }

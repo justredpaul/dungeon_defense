@@ -6,7 +6,7 @@
     "health": {
       "value": 70,
       "resistance": [],
-      "regenerationSpeed": 0
+      "regenerationSpeed": 0.01
     },
     "attack": {
       "damage": 10,
@@ -239,7 +239,7 @@
       "value": 100,
       "resistance": ["slash"],
       "vulnerability": ["fire"],
-      "regenerationSpeed": 0.05
+      "regenerationSpeed": 0
     },
     "attack": {
       "damage": 20,

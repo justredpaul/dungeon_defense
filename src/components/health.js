@@ -46,6 +46,10 @@ export class Health {
     this.damageDisplayTimer.start();
   }
 
+  restore(amount) {
+    this.value = Math.min(this.maxValue * 0.7, this.value + amount);
+  }
+
   beforeUpdate() {
     this.clear();
   }
