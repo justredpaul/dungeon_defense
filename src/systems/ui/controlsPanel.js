@@ -27,6 +27,12 @@ export const initControlsPanel = ui => {
   pauseButton.onClick = () => {
     const isPause = pauseButton.label.text === 'Pause';
 
+    if (isPause) {
+      getSystem('popups').showPopup('pause');
+    } else {
+      getSystem('popups').closePopup('pause');
+    }
+
     pauseButton.setLabel(isPause ? 'Play' : 'Pause');
     ui.update();
 
@@ -36,21 +42,6 @@ export const initControlsPanel = ui => {
   getGlobal('events').subscribe('pause', () => pauseButton.setLabel('Play'));
   getGlobal('events').subscribe('resume', () => pauseButton.setLabel('Pause'));
 
-  // const muteButton = new ButtonComponent({
-  //   x: ui.canvas.width - controlsSizes.width + 10,
-  //   y: 10,
-  //   width: 40,
-  //   height: 40,
-  //   label: 'Mute',
-  //   onClick: () => {
-  //   },
-  //   context: ui.context,
-  // });
-  // muteButton.onClick = () => {
-  //   muteButton.setLabel(muteButton.label.text === 'Mute' ? 'Unmute' : 'Mute');
-  //   ui.update();
-  // };
-
   const aboutButton = new ButtonComponent({
     x: ui.canvas.width - controlsSizes.width + 10,
     y: 10,
@@ -58,6 +49,8 @@ export const initControlsPanel = ui => {
     height: 40,
     label: 'About',
     onClick: () => {
+      if (!getGlobal('gameRunning')) return;
+
       getSystem('popups').showPopup('about');
       getGlobal('events').emit('pause');
     },
