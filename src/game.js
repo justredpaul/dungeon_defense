@@ -40,6 +40,7 @@ const init = async () => {
     initEvents();
 
     initPopups(() => {
+      plausible('game_started');
       initDebug();
       initBoard();
       initCreatures();
@@ -48,10 +49,14 @@ const init = async () => {
       initNotificationSystem();
 
       setGlobal('gameStarted', true);
-      getGlobal('events').subscribe('win',
-        () => setGlobal('gameRunning', false));
-      getGlobal('events').subscribe('lose',
-        () => setGlobal('gameRunning', false));
+      getGlobal('events').subscribe('win', () => {
+        plausible('game_win');
+        setGlobal('gameRunning', false);
+      });
+      getGlobal('events').subscribe('lose', () => {
+        plausible('game_lose');
+        setGlobal('gameRunning', false);
+      });
       getGlobal('events').subscribe('pause',
         () => setGlobal('gameRunning', false));
       getGlobal('events').subscribe('resume',
@@ -73,6 +78,7 @@ const init = async () => {
       gameLoop();
     });
   } catch (err) {
+    plausible('error', { error: err.toString() });
     console.error(err);
   }
 };
