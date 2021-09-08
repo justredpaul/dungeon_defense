@@ -39,6 +39,7 @@ export class WaveSystem extends System {
       this.enemiesRemains--;
 
       if (this.enemiesRemains === 0) {
+        getGlobal('events').emit('win');
         getSystem('popups').showPopup('win');
       }
     });
